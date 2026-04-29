@@ -1,0 +1,198 @@
+var OVAApp=(()=>{var w=(o,a)=>()=>(o&&(a=o(o=0)),a);var B=(o,a)=>()=>(a||o((a={exports:{}}).exports,a),a.exports);var k,M=w(()=>{k=[{id:1,icon:"\u{1F916}",title:"Introducci\xF3n a la Rob\xF3tica",subtitle:"\xBFQu\xE9 es y para qu\xE9 sirve?",color:"#00d4ff",accent:"#0a4a6b",lessons:[{id:"1-1",title:"\xBFQu\xE9 es la rob\xF3tica educativa?",duration:"10 min",content:`La rob\xF3tica educativa es una disciplina que combina el dise\xF1o, construcci\xF3n y programaci\xF3n de robots como estrategia pedag\xF3gica. Su objetivo es desarrollar habilidades de pensamiento computacional, resoluci\xF3n de problemas y trabajo colaborativo en los estudiantes.
+
+En contextos rurales, la rob\xF3tica educativa representa una oportunidad \xFAnica para acercar la tecnolog\xEDa a comunidades con menos acceso, usando materiales de bajo costo como Arduino y sensores reciclados.`,keyPoints:["Integra ciencia, tecnolog\xEDa, ingenier\xEDa y matem\xE1ticas (STEM)","Fomenta el aprendizaje activo y colaborativo","Desarrolla pensamiento computacional desde edades tempranas","Puede adaptarse a contextos rurales con kits econ\xF3micos"]},{id:"1-2",title:"Componentes b\xE1sicos de un robot",duration:"15 min",content:`Un robot educativo est\xE1 compuesto por tres sistemas fundamentales: sensores (entrada), procesador (l\xF3gica) y actuadores (salida). Esta estructura b\xE1sica permite al estudiante comprender c\xF3mo interact\xFAa la m\xE1quina con su entorno.
+
+Los robots m\xE1s usados en educaci\xF3n b\xE1sica incluyen plataformas como Arduino Uno, microbit y LEGO Mindstorms, cada una con diferentes niveles de complejidad.`,keyPoints:["Sensores: reciben informaci\xF3n del entorno (luz, temperatura, distancia)","Procesador: interpreta los datos y toma decisiones (Arduino, microbit)","Actuadores: generan movimiento o sonido (motores, LEDs, buzzer)","Fuente de energ\xEDa: bater\xEDas o USB"]},{id:"1-3",title:"Rob\xF3tica y equidad de g\xE9nero en STEM",duration:"12 min",content:`Hist\xF3ricamente, las \xE1reas STEM han presentado una subrepresentaci\xF3n de mujeres. Seg\xFAn datos del DANE (2023), menos del 28% de los graduados en ingenier\xEDa y tecnolog\xEDa en Colombia son mujeres.
+
+Las actividades de rob\xF3tica con enfoque de g\xE9nero intencional \u2014usando referentes femeninos, lenguaje inclusivo y roles de liderazgo t\xE9cnico para ni\xF1as\u2014 han demostrado aumentar la participaci\xF3n femenina hasta en un 41% (Pati\xF1o et al., 2023).`,keyPoints:["Usar narrativas diversas e inclusivas en los proyectos","Asignar roles t\xE9cnicos de liderazgo a las estudiantes","Visibilizar referentes femeninas en ciencia y tecnolog\xEDa","Dise\xF1ar actividades colaborativas que valoren distintas formas de contribuci\xF3n"]}]},{id:2,icon:"\u{1F4BB}",title:"Programaci\xF3n B\xE1sica",subtitle:"Arduino y Scratch paso a paso",color:"#ff6b35",accent:"#6b2510",lessons:[{id:"2-1",title:"Primeros pasos con Scratch",duration:"20 min",content:`Scratch es un lenguaje de programaci\xF3n visual desarrollado por el MIT, ideal para estudiantes de b\xE1sica primaria y secundaria. Usa bloques de colores que se ensamblan como piezas de rompecabezas, eliminando la barrera de la sintaxis.
+
+Con Scratch puedes crear animaciones, juegos y simulaciones de robots sin necesidad de hardware f\xEDsico, lo que lo hace ideal para instituciones con recursos limitados.`,keyPoints:["Interfaz de bloques visual, sin errores de sintaxis","Gratuito y disponible en espa\xF1ol en scratch.mit.edu","Permite simular comportamientos rob\xF3ticos sin hardware","Compatible con extensiones para conectar Arduino y microbit"],code:{lang:"Scratch (pseudoc\xF3digo)",snippet:`// Simular un robot que sigue una l\xEDnea en Scratch
+
+cuando [bandera verde] sea presionada
+  por siempre
+    si <sensor de color detecta [negro]> entonces
+      mover (10) pasos
+      girar \u21BA (15) grados
+    si no
+      mover (10) pasos
+    fin
+  fin`}},{id:"2-2",title:"Introducci\xF3n a Arduino",duration:"25 min",content:`Arduino es una plataforma de hardware y software de c\xF3digo abierto, basada en el lenguaje C++. Es el est\xE1ndar mundial en educaci\xF3n tecnol\xF3gica por su bajo costo (aprox. $15.000 COP), amplia comunidad y documentaci\xF3n disponible en espa\xF1ol.
+
+El flujo de trabajo es simple: escribir c\xF3digo en Arduino IDE \u2192 cargarlo al microcontrolador \u2192 el robot ejecuta las instrucciones. Este ciclo de prueba y error es el coraz\xF3n del aprendizaje por proyectos.`,keyPoints:["Lenguaje C++ simplificado, f\xE1cil de aprender","Arduino IDE gratuito para Windows, Mac y Linux","Comunidad mundial con miles de proyectos open-source","Precio accesible: Arduino Uno cuesta aprox. $15.000 - $25.000 COP"],code:{lang:"Arduino C++",snippet:`// Hacer parpadear un LED - primer programa Arduino
+
+void setup() {
+  pinMode(13, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, LOW);
+  delay(1000);
+}`}},{id:"2-3",title:"Proyecto: Robot esquiva-obst\xE1culos",duration:"30 min",content:`En este proyecto construir\xE1s un robot que detecta obst\xE1culos usando un sensor ultras\xF3nico HC-SR04 y los evita girando. Este es uno de los proyectos m\xE1s motivadores para estudiantes porque el resultado es inmediatamente visible y emocionante.
+
+El sensor ultras\xF3nico funciona como el sonar de los murci\xE9lagos: emite un pulso de sonido y mide el tiempo que tarda en rebotar. Con esa informaci\xF3n, calcula la distancia al obst\xE1culo.`,keyPoints:["Materiales: Arduino Uno, sensor HC-SR04, 2 motores DC, driver L298N","Costo aproximado total: $35.000 - $50.000 COP","El sensor mide distancias de 2cm a 400cm con 3mm de precisi\xF3n","El proyecto completo toma 2-3 horas de clase"],code:{lang:"Arduino C++",snippet:`#define TRIG_PIN 9
+#define ECHO_PIN 10
+#define MOTOR_IZQ 5
+#define MOTOR_DER 6
+
+void setup() {
+  pinMode(TRIG_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
+  pinMode(MOTOR_IZQ, OUTPUT);
+  pinMode(MOTOR_DER, OUTPUT);
+  Serial.begin(9600);
+}
+
+long medirDistancia() {
+  digitalWrite(TRIG_PIN, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG_PIN, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG_PIN, LOW);
+  long duracion = pulseIn(ECHO_PIN, HIGH);
+  return duracion * 0.034 / 2;
+}
+
+void loop() {
+  long distancia = medirDistancia();
+  if (distancia < 20) {
+    analogWrite(MOTOR_IZQ, 200);
+    analogWrite(MOTOR_DER, 0);
+    delay(500);
+  } else {
+    analogWrite(MOTOR_IZQ, 200);
+    analogWrite(MOTOR_DER, 200);
+  }
+}`}}]},{id:3,icon:"\u{1F4DD}",title:"Evaluaciones",subtitle:"Comprueba lo que aprendiste",color:"#a855f7",accent:"#3b0764",quizzes:[{id:"q1",module:"Rob\xF3tica General",questions:[{q:"\xBFCu\xE1l es la funci\xF3n principal de los SENSORES en un robot?",opts:["Mover las ruedas del robot","Recibir informaci\xF3n del entorno","Almacenar el programa","Suministrar energ\xEDa al sistema"],ans:1,exp:"Los sensores son los '\xF3rganos sensoriales' del robot: captan informaci\xF3n del ambiente (luz, temperatura, distancia) y la env\xEDan al procesador."},{q:"\xBFQu\xE9 porcentaje de graduados en ingenier\xEDa y tecnolog\xEDa en Colombia son mujeres, seg\xFAn el DANE 2023?",opts:["Menos del 28%","Aproximadamente el 50%","M\xE1s del 60%","El 35%"],ans:0,exp:"Seg\xFAn datos del DANE (2023), menos del 28% de los graduados en programas de ingenier\xEDa y tecnolog\xEDa en Colombia son mujeres, evidenciando la brecha de g\xE9nero en STEM."},{q:"\xBFQu\xE9 herramienta es ideal para comenzar a programar robots SIN hardware f\xEDsico?",opts:["Arduino IDE","Scratch","MongoDB","Node.js"],ans:1,exp:"Scratch permite simular comportamientos rob\xF3ticos usando bloques visuales, sin necesidad de hardware, ideal para contextos con recursos limitados."}]},{id:"q2",module:"Programaci\xF3n Arduino",questions:[{q:"\xBFQu\xE9 funci\xF3n de Arduino se ejecuta UNA SOLA VEZ al encender el dispositivo?",opts:["loop()","setup()","delay()","pinMode()"],ans:1,exp:"setup() se ejecuta una \xFAnica vez al inicio. Se usa para configurar los pines y la comunicaci\xF3n serial. loop() se repite infinitamente despu\xE9s."},{q:"\xBFQu\xE9 hace la instrucci\xF3n digitalWrite(13, HIGH) en Arduino?",opts:["Lee el voltaje del pin 13","Env\xEDa energ\xEDa al pin 13 (enciende un LED)","Espera 13 milisegundos","Define el pin 13 como entrada"],ans:1,exp:"digitalWrite(pin, HIGH) env\xEDa 5V al pin indicado, lo que enciende un LED conectado all\xED. digitalWrite(pin, LOW) lo apaga enviando 0V."},{q:"\xBFCu\xE1nto cuesta aproximadamente un Arduino Uno en Colombia?",opts:["$5.000 COP","$15.000 - $25.000 COP","$200.000 COP","$500.000 COP"],ans:1,exp:"El Arduino Uno tiene un costo accesible de entre $15.000 y $25.000 COP, lo que lo hace viable para instituciones educativas con presupuestos limitados."}]}]}]});var j,P=w(()=>{j=`
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #060b18; --surface: #0d1526; --surface2: #111c34;
+    --border: rgba(0,212,255,0.12); --text: #e2e8f8; --muted: #7a8ab5;
+    --cyan: #00d4ff; --orange: #ff6b35; --purple: #a855f7;
+    --green: #22c55e; --red: #ef4444;
+  }
+  body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden; }
+  .ova-root { display: flex; height: 100vh; width: 100vw; overflow: hidden; position: relative; }
+  .ova-root::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: radial-gradient(circle at 20% 50%, rgba(0,212,255,0.04) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(168,85,247,0.04) 0%, transparent 40%),
+      radial-gradient(circle at 60% 80%, rgba(255,107,53,0.04) 0%, transparent 40%);
+    pointer-events: none; z-index: 0;
+  }
+  .sidebar { width: 260px; min-width: 260px; background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; z-index: 10; overflow-y: auto; }
+  .sidebar-logo { padding: 24px 20px 20px; border-bottom: 1px solid var(--border); }
+  .logo-badge { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(168,85,247,0.1)); border: 1px solid rgba(0,212,255,0.25); border-radius: 10px; padding: 8px 14px; font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: var(--cyan); letter-spacing: 0.5px; margin-bottom: 10px; }
+  .logo-title { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.3; }
+  .logo-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  .sidebar-section { padding: 16px 12px 8px; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 16px; margin: 2px 8px; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 13px; font-weight: 500; color: var(--muted); border: 1px solid transparent; }
+  .nav-item:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+  .nav-item.active { background: rgba(0,212,255,0.08); border-color: rgba(0,212,255,0.2); color: var(--cyan); }
+  .nav-item .nav-icon { font-size: 16px; width: 22px; text-align: center; }
+  .nav-item .nav-badge { margin-left: auto; background: rgba(0,212,255,0.15); color: var(--cyan); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 20px; }
+  .nav-sub { display: flex; align-items: center; gap: 10px; padding: 7px 16px 7px 46px; margin: 1px 8px; border-radius: 6px; cursor: pointer; font-size: 12px; color: var(--muted); transition: all 0.15s; border-left: 2px solid transparent; }
+  .nav-sub:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+  .nav-sub.active { color: var(--cyan); border-left-color: var(--cyan); }
+  .progress-bar-mini { height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; margin: 3px 0 0; overflow: hidden; }
+  .progress-bar-mini-fill { height: 100%; border-radius: 2px; transition: width 0.6s ease; }
+  .sidebar-footer { margin-top: auto; padding: 16px 12px; border-top: 1px solid var(--border); }
+  .student-card { display: flex; align-items: center; gap: 10px; padding: 10px; background: var(--surface2); border-radius: 10px; border: 1px solid var(--border); }
+  .avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--purple)); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .student-name { font-size: 13px; font-weight: 600; }
+  .student-pts { font-size: 11px; color: var(--cyan); }
+  .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; z-index: 1; position: relative; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; padding: 16px 28px; border-bottom: 1px solid var(--border); background: rgba(6,11,24,0.8); backdrop-filter: blur(10px); flex-shrink: 0; }
+  .topbar-title { font-size: 17px; font-weight: 700; }
+  .topbar-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .topbar-actions { display: flex; gap: 10px; align-items: center; }
+  .btn { padding: 8px 18px; border-radius: 8px; border: none; cursor: pointer; font-size: 13px; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.2s; }
+  .btn-primary { background: linear-gradient(135deg, var(--cyan), #0099cc); color: #000; }
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+  .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+  .btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); }
+  .content { flex: 1; overflow-y: auto; padding: 28px; scrollbar-width: thin; scrollbar-color: rgba(0,212,255,0.2) transparent; }
+  .home-hero { background: linear-gradient(135deg, rgba(0,212,255,0.08) 0%, rgba(168,85,247,0.05) 100%); border: 1px solid rgba(0,212,255,0.15); border-radius: 20px; padding: 32px 36px; margin-bottom: 28px; position: relative; overflow: hidden; }
+  .home-hero::after { content: '\u{1F916}'; position: absolute; right: 36px; top: 50%; transform: translateY(-50%); font-size: 72px; opacity: 0.15; }
+  .hero-tag { display: inline-block; background: rgba(0,212,255,0.15); color: var(--cyan); font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 14px; font-family: 'Space Mono', monospace; }
+  .hero-title { font-size: 28px; font-weight: 800; line-height: 1.2; margin-bottom: 10px; background: linear-gradient(135deg, #fff 40%, var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-desc { font-size: 14px; color: var(--muted); line-height: 1.6; max-width: 520px; }
+  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; display: flex; align-items: center; gap: 14px; }
+  .stat-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .stat-value { font-size: 22px; font-weight: 800; font-family: 'Space Mono', monospace; }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .section-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); margin-left: 8px; }
+  .modules-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+  .module-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 22px; cursor: pointer; transition: all 0.25s; position: relative; overflow: hidden; }
+  .module-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.4); }
+  .module-icon { font-size: 32px; margin-bottom: 14px; display: block; }
+  .module-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .module-sub { font-size: 12px; color: var(--muted); margin-bottom: 16px; line-height: 1.4; }
+  .module-meta { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: var(--muted); }
+  .module-progress { height: 4px; background: rgba(255,255,255,0.08); border-radius: 4px; margin-top: 12px; overflow: hidden; }
+  .module-progress-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+  .lesson-header { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px 28px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 20px; }
+  .lesson-number { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace; font-size: 18px; font-weight: 700; flex-shrink: 0; }
+  .lesson-title-main { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+  .lesson-meta-row { display: flex; gap: 16px; font-size: 12px; color: var(--muted); }
+  .lesson-meta-item { display: flex; align-items: center; gap: 5px; }
+  .lesson-body { display: grid; grid-template-columns: 1fr 340px; gap: 20px; }
+  .lesson-content-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+  .lesson-text { font-size: 14px; line-height: 1.8; color: #c5d0e8; white-space: pre-line; margin-bottom: 24px; }
+  .key-points { background: rgba(0,212,255,0.04); border: 1px solid rgba(0,212,255,0.12); border-radius: 12px; padding: 18px; }
+  .key-points-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--cyan); margin-bottom: 12px; font-family: 'Space Mono', monospace; }
+  .key-point { display: flex; gap: 10px; margin-bottom: 10px; font-size: 13px; line-height: 1.5; color: #c5d0e8; }
+  .key-point::before { content: '\u25B8'; color: var(--cyan); flex-shrink: 0; margin-top: 1px; }
+  .lesson-sidebar-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px; height: fit-content; }
+  .code-block { background: #020810; border: 1px solid rgba(0,212,255,0.15); border-radius: 12px; padding: 18px; font-family: 'Space Mono', monospace; font-size: 11px; line-height: 1.7; color: #8be0ff; white-space: pre-wrap; overflow-x: auto; margin-top: 12px; }
+  .code-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .code-lang { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--orange); font-family: 'Space Mono', monospace; }
+  .code-dots { display: flex; gap: 5px; }
+  .code-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .lesson-nav { display: flex; gap: 12px; margin-top: 20px; justify-content: space-between; }
+  .lesson-list { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
+  .lesson-item { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; font-size: 13px; font-weight: 500; }
+  .lesson-item:last-child { border-bottom: none; }
+  .lesson-item:hover { background: rgba(255,255,255,0.03); }
+  .lesson-item.active { background: rgba(0,212,255,0.06); }
+  .lesson-check { width: 22px; height: 22px; border-radius: 50%; border: 2px solid; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; font-weight: 700; }
+  .quiz-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 32px; max-width: 720px; margin: 0 auto; }
+  .quiz-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; }
+  .quiz-tag { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--purple); background: rgba(168,85,247,0.1); padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; display: inline-block; }
+  .quiz-q-title { font-size: 18px; font-weight: 700; line-height: 1.4; }
+  .quiz-counter { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--muted); white-space: nowrap; background: var(--surface2); padding: 6px 14px; border-radius: 8px; border: 1px solid var(--border); }
+  .quiz-progress { height: 6px; background: rgba(255,255,255,0.07); border-radius: 6px; margin-bottom: 28px; overflow: hidden; }
+  .quiz-progress-fill { height: 100%; background: linear-gradient(90deg, var(--purple), #c084fc); border-radius: 6px; transition: width 0.4s ease; }
+  .quiz-options { display: grid; gap: 12px; margin-bottom: 24px; }
+  .quiz-option { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 12px; border: 2px solid var(--border); cursor: pointer; transition: all 0.2s; font-size: 14px; background: var(--surface2); }
+  .quiz-option:hover:not(.disabled) { border-color: rgba(168,85,247,0.4); background: rgba(168,85,247,0.05); }
+  .quiz-option.selected { border-color: var(--purple); background: rgba(168,85,247,0.1); }
+  .quiz-option.correct { border-color: var(--green); background: rgba(34,197,94,0.1); }
+  .quiz-option.wrong { border-color: var(--red); background: rgba(239,68,68,0.1); }
+  .quiz-option.disabled { cursor: default; }
+  .option-letter { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; background: rgba(255,255,255,0.06); flex-shrink: 0; transition: all 0.2s; }
+  .quiz-option.correct .option-letter { background: var(--green); color: #000; }
+  .quiz-option.wrong .option-letter { background: var(--red); color: #fff; }
+  .quiz-option.selected:not(.correct):not(.wrong) .option-letter { background: var(--purple); color: #fff; }
+  .explanation { background: rgba(34,197,94,0.07); border: 1px solid rgba(34,197,94,0.2); border-radius: 12px; padding: 16px; font-size: 13px; line-height: 1.6; color: #a7f3d0; margin-bottom: 20px; display: flex; gap: 10px; align-items: flex-start; }
+  .explanation-icon { font-size: 18px; flex-shrink: 0; }
+  .results-card { text-align: center; padding: 40px 20px; }
+  .results-emoji { font-size: 64px; margin-bottom: 16px; display: block; }
+  .results-score { font-size: 52px; font-weight: 800; font-family: 'Space Mono', monospace; background: linear-gradient(135deg, var(--purple), #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; }
+  .results-label { font-size: 16px; color: var(--muted); margin-bottom: 28px; }
+  .results-breakdown { display: flex; justify-content: center; gap: 24px; margin-bottom: 32px; flex-wrap: wrap; }
+  .breakdown-item { text-align: center; padding: 14px 20px; background: var(--surface2); border-radius: 12px; border: 1px solid var(--border); min-width: 90px; }
+  .breakdown-val { font-size: 24px; font-weight: 800; font-family: 'Space Mono', monospace; }
+  .breakdown-lbl { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .quiz-selector { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 24px; }
+  .quiz-sel-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; cursor: pointer; transition: all 0.2s; }
+  .quiz-sel-card:hover { border-color: rgba(168,85,247,0.4); transform: translateY(-2px); }
+  .quiz-sel-icon { font-size: 36px; margin-bottom: 12px; }
+  .quiz-sel-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .quiz-sel-sub { font-size: 12px; color: var(--muted); }
+  .quiz-sel-meta { margin-top: 14px; font-size: 11px; color: var(--purple); font-weight: 600; display: flex; align-items: center; gap: 5px; }
+`});function A({view:o,setView:a,activeModule:l,setActiveModule:c,activeLesson:g,setActiveLesson:u,progress:e}){return d.createElement("aside",{className:"sidebar"},d.createElement("div",{className:"sidebar-logo"},d.createElement("div",{className:"logo-badge"},"\u2699 OVA \xB7 v1.0"),d.createElement("div",{className:"logo-title"},"Rob\xF3tica Educativa"),d.createElement("div",{className:"logo-sub"},"Gesti\xF3n del Conocimiento STEM")),d.createElement("div",{className:"sidebar-section"},"Navegaci\xF3n"),d.createElement("div",{className:`nav-item ${o==="home"?"active":""}`,onClick:()=>a("home")},d.createElement("span",{className:"nav-icon"},"\u{1F3E0}")," Inicio"),d.createElement("div",{className:"sidebar-section"},"M\xF3dulos"),k.slice(0,2).map(r=>{let t=l===r.id,v=e[r.id]?.done||0,h=r.lessons?.length||0,q=h>0?Math.round(v/h*100):0;return d.createElement("div",{key:r.id},d.createElement("div",{className:`nav-item ${t&&o==="lesson"?"active":""}`,onClick:()=>{c(r.id),u(r.lessons[0]),a("lesson")}},d.createElement("span",{className:"nav-icon"},r.icon),d.createElement("span",{style:{flex:1,lineHeight:1.3}},r.title),d.createElement("span",{className:"nav-badge"},q,"%")),d.createElement("div",{className:"progress-bar-mini",style:{margin:"-4px 20px 6px"}},d.createElement("div",{className:"progress-bar-mini-fill",style:{width:`${q}%`,background:r.color}})),t&&o==="lesson"&&r.lessons.map((x,N)=>{let S=(e[r.id]?.lessons||{})[x.id];return d.createElement("div",{key:x.id,className:`nav-sub ${g?.id===x.id?"active":""}`,onClick:()=>{u(x),a("lesson")}},S?"\u2713":`${N+1}.`," ",x.title)}))}),d.createElement("div",{className:"sidebar-section"},"Evaluaci\xF3n"),d.createElement("div",{className:`nav-item ${o==="quiz-select"||o==="quiz"?"active":""}`,onClick:()=>a("quiz-select")},d.createElement("span",{className:"nav-icon"},"\u{1F4DD}")," Evaluaciones",d.createElement("span",{className:"nav-badge"},"2")),d.createElement("div",{className:"sidebar-footer"},d.createElement("div",{className:"student-card"},d.createElement("div",{className:"avatar"},"\u{1F469}"),d.createElement("div",null,d.createElement("div",{className:"student-name"},"Jennsi Su\xE1rez"),d.createElement("div",{className:"student-pts"},"\u2B50 ",Object.values(e).reduce((r,t)=>r+(t.done||0),0)*10," pts")))))}var d,I=w(()=>{M();d=window.React});function D({setView:o,setActiveModule:a,setActiveLesson:l,progress:c}){let g=k.slice(0,2).reduce((e,r)=>e+r.lessons.length,0),u=Object.values(c).reduce((e,r)=>e+(r.done||0),0);return i.createElement("div",{className:"content"},i.createElement("div",{className:"home-hero"},i.createElement("div",{className:"hero-tag"},"\u{1F916} OVA \xB7 Rob\xF3tica Educativa"),i.createElement("div",{className:"hero-title"},"Aprende rob\xF3tica,",i.createElement("br",null),"transforma tu comunidad"),i.createElement("div",{className:"hero-desc"},"Un objeto virtual de aprendizaje dise\xF1ado para fortalecer competencias STEM en contextos rurales colombianos, con enfoque en equidad de g\xE9nero.")),i.createElement("div",{className:"stats-row"},i.createElement("div",{className:"stat-card"},i.createElement("div",{className:"stat-icon",style:{background:"rgba(0,212,255,0.1)"}},"\u{1F4DA}"),i.createElement("div",null,i.createElement("div",{className:"stat-value",style:{color:"var(--cyan)"}},u,"/",g),i.createElement("div",{className:"stat-label"},"Lecciones completadas"))),i.createElement("div",{className:"stat-card"},i.createElement("div",{className:"stat-icon",style:{background:"rgba(255,107,53,0.1)"}},"\u26A1"),i.createElement("div",null,i.createElement("div",{className:"stat-value",style:{color:"var(--orange)"}},g>0?Math.round(u/g*100):0,"%"),i.createElement("div",{className:"stat-label"},"Progreso total"))),i.createElement("div",{className:"stat-card"},i.createElement("div",{className:"stat-icon",style:{background:"rgba(168,85,247,0.1)"}},"\u{1F3C6}"),i.createElement("div",null,i.createElement("div",{className:"stat-value",style:{color:"var(--purple)"}},u*10),i.createElement("div",{className:"stat-label"},"Puntos obtenidos")))),i.createElement("div",{className:"section-title"},"M\xF3dulos del OVA"),i.createElement("div",{className:"modules-grid"},k.map(e=>{let r=c[e.id]?.done||0,t=e.lessons?.length||e.quizzes?.length||0,v=t>0?Math.round(r/t*100):0;return i.createElement("div",{key:e.id,className:"module-card",onClick:()=>{if(e.id===3){o("quiz-select");return}a(e.id),l(e.lessons[0]),o("lesson")}},i.createElement("div",{style:{position:"absolute",top:0,left:0,right:0,height:3,background:e.color,borderRadius:"16px 16px 0 0"}}),i.createElement("span",{className:"module-icon"},e.icon),i.createElement("div",{className:"module-title"},e.title),i.createElement("div",{className:"module-sub"},e.subtitle),i.createElement("div",{className:"module-meta"},i.createElement("span",{style:{color:e.color,fontWeight:700,fontSize:12}},v,"% completado"),i.createElement("span",null,t," ",e.lessons?"lecciones":"quizzes")),i.createElement("div",{className:"module-progress"},i.createElement("div",{className:"module-progress-fill",style:{width:`${v}%`,background:e.color}})))})),i.createElement("div",{className:"section-title"},"Lecciones recientes"),i.createElement("div",{className:"lesson-list"},k.slice(0,2).flatMap(e=>e.lessons.slice(0,2).map(r=>{let t=(c[e.id]?.lessons||{})[r.id];return i.createElement("div",{key:r.id,className:"lesson-item",onClick:()=>{a(e.id),l(r),o("lesson")}},i.createElement("div",{className:"lesson-check",style:{borderColor:t?"var(--green)":e.color,color:t?"var(--green)":e.color,background:t?"rgba(34,197,94,0.1)":"transparent"}},t?"\u2713":e.icon),i.createElement("div",{style:{flex:1}},i.createElement("div",{style:{fontWeight:600,fontSize:13}},r.title),i.createElement("div",{style:{fontSize:11,color:"var(--muted)",marginTop:2}},e.title," \xB7 ",r.duration)),i.createElement("span",{style:{color:"var(--muted)",fontSize:18}},"\u203A"))}))))}var i,L=w(()=>{M();i=window.React});function T({mod:o,lesson:a,lessons:l,setActiveLesson:c,markDone:g,progress:u}){let e=l.findIndex(t=>t.id===a.id),r=(u[o.id]?.lessons||{})[a.id];return s.createElement("div",{className:"content"},s.createElement("div",{className:"lesson-header"},s.createElement("div",{className:"lesson-number",style:{background:`${o.color}20`,color:o.color}},e+1),s.createElement("div",null,s.createElement("div",{className:"lesson-title-main"},a.title),s.createElement("div",{className:"lesson-meta-row"},s.createElement("span",{className:"lesson-meta-item"},"\u23F1 ",a.duration),s.createElement("span",{className:"lesson-meta-item"},"\u{1F4E6} ",o.title),r&&s.createElement("span",{className:"lesson-meta-item",style:{color:"var(--green)"}},"\u2713 Completada")))),s.createElement("div",{className:"lesson-body"},s.createElement("div",{className:"lesson-content-card"},s.createElement("div",{className:"lesson-text"},a.content),s.createElement("div",{className:"key-points"},s.createElement("div",{className:"key-points-title"},"Puntos clave"),a.keyPoints.map((t,v)=>s.createElement("div",{className:"key-point",key:v},t))),s.createElement("div",{className:"lesson-nav"},e>0?s.createElement("button",{className:"btn btn-ghost",onClick:()=>c(l[e-1])},"\u2190 Anterior"):s.createElement("div",null),s.createElement("button",{className:"btn btn-primary",style:r?{background:"var(--green)",color:"#000"}:{},onClick:()=>{g(o.id,a.id),e<l.length-1&&c(l[e+1])}},r?"\u2713 Completada":e<l.length-1?"Completar y seguir \u2192":"Finalizar m\xF3dulo"))),s.createElement("div",null,a.code&&s.createElement("div",{className:"lesson-sidebar-card",style:{marginBottom:16}},s.createElement("div",{className:"code-header"},s.createElement("span",{className:"code-lang"},"\u{1F4BB} ",a.code.lang),s.createElement("div",{className:"code-dots"},s.createElement("div",{className:"code-dot",style:{background:"#ef4444"}}),s.createElement("div",{className:"code-dot",style:{background:"#f59e0b"}}),s.createElement("div",{className:"code-dot",style:{background:"#22c55e"}}))),s.createElement("div",{className:"code-block"},a.code.snippet)),s.createElement("div",{className:"lesson-sidebar-card"},s.createElement("div",{style:{fontSize:12,fontWeight:700,textTransform:"uppercase",letterSpacing:1,color:"var(--muted)",marginBottom:12}},"Lecciones del m\xF3dulo"),l.map((t,v)=>{let h=(u[o.id]?.lessons||{})[t.id];return s.createElement("div",{key:t.id,className:`lesson-item ${t.id===a.id?"active":""}`,style:{borderBottom:v<l.length-1?"1px solid var(--border)":"none",padding:"10px 4px"},onClick:()=>c(t)},s.createElement("div",{className:"lesson-check",style:{width:20,height:20,fontSize:10,borderColor:h?"var(--green)":t.id===a.id?o.color:"var(--border)",color:h?"var(--green)":t.id===a.id?o.color:"var(--muted)",background:h?"rgba(34,197,94,0.1)":"transparent"}},h?"\u2713":v+1),s.createElement("div",null,s.createElement("div",{style:{fontSize:12,fontWeight:600,lineHeight:1.3}},t.title),s.createElement("div",{style:{fontSize:10,color:"var(--muted)",marginTop:2}},t.duration)))})))))}var s,U=w(()=>{s=window.React});function $({setView:o,setActiveQuiz:a}){return y.createElement("div",{className:"content"},y.createElement("div",{className:"home-hero",style:{background:"linear-gradient(135deg,rgba(168,85,247,0.1),rgba(0,212,255,0.05))",borderColor:"rgba(168,85,247,0.2)",marginBottom:24}},y.createElement("div",{className:"hero-tag",style:{background:"rgba(168,85,247,0.15)",color:"var(--purple)"}},"\u{1F4DD} Zona de evaluaci\xF3n"),y.createElement("div",{className:"hero-title"},"Evaluaciones del OVA"),y.createElement("div",{className:"hero-desc"},"Selecciona un quiz para comprobar lo que aprendiste. Cada pregunta incluye retroalimentaci\xF3n inmediata.")),y.createElement("div",{className:"quiz-selector"},k[2].quizzes.map((l,c)=>y.createElement("div",{key:l.id,className:"quiz-sel-card",onClick:()=>{a(l),o("quiz")}},y.createElement("div",{className:"quiz-sel-icon"},c===0?"\u{1F916}":"\u{1F4BB}"),y.createElement("div",{className:"quiz-sel-title"},l.module),y.createElement("div",{className:"quiz-sel-sub"},l.questions.length," preguntas de selecci\xF3n m\xFAltiple"),y.createElement("div",{className:"quiz-sel-meta"},"\u{1F4DD} Iniciar evaluaci\xF3n \u2192")))))}var y,H=w(()=>{M();y=window.React});function W({quiz:o,setView:a,addScore:l}){let[c,g]=C(0),[u,e]=C(null),[r,t]=C(!1),[v,h]=C(!1),[q,x]=C([]),N=o.questions[c],S=Math.round(c/o.questions.length*100),z=b=>{if(r)return;e(b),t(!0);let m=b===N.ans;x(f=>[...f,{selected:b,correct:m}])},O=()=>{c<o.questions.length-1?(g(b=>b+1),e(null),t(!1)):(h(!0),l())};if(v){let b=o.questions.length,m=q.filter(V=>V.correct).length,f=Math.round(m/b*100);return n.createElement("div",{className:"content"},n.createElement("div",{className:"quiz-card"},n.createElement("div",{className:"results-card"},n.createElement("span",{className:"results-emoji"},f>=70?"\u{1F389}":"\u{1F4DA}"),n.createElement("div",{className:"results-score"},f,"%"),n.createElement("div",{className:"results-label"},f>=70?"\xA1Excelente trabajo! Dominas este tema.":"Sigue practicando, \xA1puedes mejorar!"),n.createElement("div",{className:"results-breakdown"},n.createElement("div",{className:"breakdown-item"},n.createElement("div",{className:"breakdown-val",style:{color:"var(--green)"}},m),n.createElement("div",{className:"breakdown-lbl"},"Correctas")),n.createElement("div",{className:"breakdown-item"},n.createElement("div",{className:"breakdown-val",style:{color:"var(--red)"}},b-m),n.createElement("div",{className:"breakdown-lbl"},"Incorrectas")),n.createElement("div",{className:"breakdown-item"},n.createElement("div",{className:"breakdown-val",style:{color:"var(--purple)"}},b),n.createElement("div",{className:"breakdown-lbl"},"Total"))),n.createElement("div",{style:{display:"flex",gap:12,justifyContent:"center"}},n.createElement("button",{className:"btn btn-ghost",onClick:()=>{g(0),e(null),t(!1),h(!1),x([])}},"\u{1F501} Intentar de nuevo"),n.createElement("button",{className:"btn btn-primary",onClick:()=>a("quiz-select")},"Ver otras evaluaciones")))))}return n.createElement("div",{className:"content"},n.createElement("div",{className:"quiz-card"},n.createElement("div",{className:"quiz-header"},n.createElement("div",null,n.createElement("div",{className:"quiz-tag"},"\u{1F4DD} ",o.module),n.createElement("div",{className:"quiz-q-title"},N.q)),n.createElement("div",{className:"quiz-counter"},c+1," / ",o.questions.length)),n.createElement("div",{className:"quiz-progress"},n.createElement("div",{className:"quiz-progress-fill",style:{width:`${S}%`}})),n.createElement("div",{className:"quiz-options"},N.opts.map((b,m)=>{let f="quiz-option";return r?(f+=" disabled",m===N.ans?f+=" correct":m===u&&(f+=" wrong")):m===u&&(f+=" selected"),n.createElement("div",{key:m,className:f,onClick:()=>z(m)},n.createElement("div",{className:"option-letter"},["A","B","C","D"][m]),n.createElement("span",null,b))})),r&&n.createElement("div",{className:"explanation"},n.createElement("span",{className:"explanation-icon"},"\u{1F4A1}"),n.createElement("span",null,n.createElement("strong",null,"Explicaci\xF3n:")," ",N.exp)),n.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center"}},n.createElement("button",{className:"btn btn-ghost",onClick:()=>a("quiz-select")},"\u2190 Salir"),r&&n.createElement("button",{className:"btn btn-primary",onClick:O},c<o.questions.length-1?"Siguiente pregunta \u2192":"Ver resultados"))))}var n,C,Q=w(()=>{n=window.React,{useState:C}=n});function _(){let[o,a]=E("home"),[l,c]=E(1),[g,u]=E(null),[e,r]=E(null),[t,v]=E({1:{done:0,lessons:{}},2:{done:0,lessons:{}},3:{done:0}}),h=(z,O)=>{v(b=>{let m=b[z]||{done:0,lessons:{}};if(m.lessons[O])return b;let f={...m.lessons,[O]:!0};return{...b,[z]:{done:m.done+1,lessons:f}}})},q=()=>{v(z=>({...z,3:{done:(z[3]?.done||0)+1}}))},x=k.find(z=>z.id===l),N={home:{title:"Panel Principal",sub:"Bienvenida al OVA de Rob\xF3tica Educativa"},lesson:{title:g?.title||"Lecci\xF3n",sub:x?.title},"quiz-select":{title:"Evaluaciones",sub:"Comprueba tu aprendizaje"},quiz:{title:e?.module||"Quiz",sub:"Selecci\xF3n m\xFAltiple con retroalimentaci\xF3n"}},S=N[o]||N.home;return p.createElement(p.Fragment,null,p.createElement("style",null,j),p.createElement("div",{className:"ova-root"},p.createElement(A,{view:o,setView:a,activeModule:l,setActiveModule:c,activeLesson:g,setActiveLesson:u,progress:t}),p.createElement("div",{className:"main"},p.createElement("div",{className:"topbar"},p.createElement("div",null,p.createElement("div",{className:"topbar-title"},S.title),p.createElement("div",{className:"topbar-sub"},S.sub)),p.createElement("div",{className:"topbar-actions"},o!=="home"&&p.createElement("button",{className:"btn btn-ghost",onClick:()=>a("home")},"\u{1F3E0} Inicio"),p.createElement("button",{className:"btn btn-primary"},"\u2B07 Exportar SCORM"))),o==="home"&&p.createElement(D,{setView:a,setActiveModule:c,setActiveLesson:u,progress:t}),o==="lesson"&&x&&g&&p.createElement(T,{mod:x,lesson:g,lessons:x.lessons,setActiveLesson:u,markDone:h,progress:t}),o==="quiz-select"&&p.createElement($,{setView:a,setActiveQuiz:r}),o==="quiz"&&e&&p.createElement(W,{quiz:e,setView:a,addScore:q}))))}var p,E,G=w(()=>{M();P();I();L();U();H();Q();p=window.React,{useState:E}=p});var F=B(()=>{G();var Z=window.React,J=window.ReactDOM,Y=J.createRoot(document.getElementById("root"));Y.render(Z.createElement(_,null))});return F();})();
