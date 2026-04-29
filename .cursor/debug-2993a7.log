@@ -1,0 +1,4 @@
+{"sessionId":"2993a7","runId":"initial","hypothesisId":"H2","location":"src/main.jsx:20","message":"React globals availability","data":{"hasReact":true,"hasReactDOM":true,"reactDOMKeys":["__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED","createPortal","createRoot","findDOMNode","flushSync"]},"timestamp":1777502863909}
+{"sessionId":"2993a7","runId":"initial","hypothesisId":"H3","location":"src/main.jsx:34","message":"Root element lookup","data":{"hasRoot":true},"timestamp":1777502863909}
+{"sessionId":"2993a7","runId":"initial","hypothesisId":"H1","location":"src/main.jsx:6","message":"App bootstrap location context","data":{"href":"file:///C:/Users/paezj/Downloads/OVA/OVA/dist/index.html","host":"","protocol":"file:"},"timestamp":1777502863905}
+{"sessionId":"2993a7","runId":"initial","hypothesisId":"H4","location":"src/main.jsx:49","message":"createRoot/render executed","data":{"rendered":true},"timestamp":1777502863912}

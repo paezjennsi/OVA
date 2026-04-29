@@ -4,8 +4,8 @@
   "description": "",
   "main": "src/main.jsx",
   "scripts": {
-    "build": ".\\node_modules\\.bin\\esbuild.cmd src/main.jsx --bundle --outfile=dist/app.js --loader:.jsx=jsx --format=iife --global-name=OVAApp --minify",
-    "build:watch": ".\\node_modules\\.bin\\esbuild.cmd src/main.jsx --bundle --outfile=dist/app.js --loader:.jsx=jsx --format=iife --global-name=OVAApp --watch"
+    "build": "esbuild src/main.jsx --bundle --outfile=dist/app.js --loader:.jsx=jsx --format=iife --global-name=OVAApp --minify",
+    "build:watch": "esbuild src/main.jsx --bundle --outfile=dist/app.js --loader:.jsx=jsx --format=iife --global-name=OVAApp --watch"
   },
   "keywords": [],
   "author": "",
