@@ -5,16 +5,57 @@ import { Home } from "./components/Home.jsx";
 import { LessonView } from "./components/LessonView.jsx";
 import { QuizSelect } from "./components/QuizSelect.jsx";
 import { QuizView } from "./components/QuizView.jsx";
+import { StudentRegister } from "./components/StudentRegister.jsx";
+import { fetchLessonProgress, getStoredStudentId, lessonsRowsToProgressShape, recordVisit, syncLessonComplete } from "./lib/ovaApi.js";
 
 const React = window.React;
 const { useState } = React;
+const { useEffect } = React;
+
+const defaultProgress = () => ({ 1: { done: 0, lessons: {} }, 2: { done: 0, lessons: {} }, 3: { done: 0 } });
 
 export function App() {
+  const [studentId, setStudentId] = useState(() => getStoredStudentId());
   const [view, setView] = useState("home");
   const [activeModule, setActiveModule] = useState(1);
   const [activeLesson, setActiveLesson] = useState(null);
   const [activeQuiz, setActiveQuiz] = useState(null);
-  const [progress, setProgress] = useState({ 1: { done: 0, lessons: {} }, 2: { done: 0, lessons: {} }, 3: { done: 0 } });
+  const [progress, setProgress] = useState(defaultProgress);
+
+  useEffect(() => {
+    if (!studentId) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const data = await fetchLessonProgress(studentId);
+        if (cancelled) return;
+        setProgress((prev) => {
+          const fromServer = lessonsRowsToProgressShape(data.lessons, prev[3]);
+          return { ...fromServer, 3: prev[3] || { done: 0 } };
+        });
+      } catch (_) {}
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [studentId]);
+
+  useEffect(() => {
+    if (!studentId) return;
+    const flag = `ova_visit_${studentId}`;
+    try {
+      if (sessionStorage.getItem(flag)) return;
+    } catch {
+      return;
+    }
+    recordVisit(studentId)
+      .then(() => {
+        try {
+          sessionStorage.setItem(flag, "1");
+        } catch (_) {}
+      })
+      .catch(() => {});
+  }, [studentId]);
 
   const markDone = (modId, lessonId) => {
     setProgress((prev) => {
@@ -23,6 +64,7 @@ export function App() {
       const newLessons = { ...mod.lessons, [lessonId]: true };
       return { ...prev, [modId]: { done: mod.done + 1, lessons: newLessons } };
     });
+    if (studentId) syncLessonComplete(studentId, modId, lessonId).catch(() => {});
   };
 
   const addScore = () => {
@@ -37,6 +79,15 @@ export function App() {
     quiz: { title: activeQuiz?.module || "Quiz", sub: "Selección múltiple con retroalimentación" },
   };
   const info = topbarInfo[view] || topbarInfo.home;
+
+  if (!studentId) {
+    return (
+      <>
+        <style>{css}</style>
+        <StudentRegister onRegistered={setStudentId} />
+      </>
+    );
+  }
 
   return (
     <>
