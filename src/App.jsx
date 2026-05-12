@@ -6,6 +6,7 @@ import { LessonView } from "./components/LessonView.jsx";
 import { QuizSelect } from "./components/QuizSelect.jsx";
 import { QuizView } from "./components/QuizView.jsx";
 import { StudentRegister } from "./components/StudentRegister.jsx";
+import { AIChatPanel } from "./components/AIChatPanel.jsx";
 import { fetchLessonProgress, getStoredStudentId, lessonsRowsToProgressShape, recordVisit, syncLessonComplete } from "./lib/ovaApi.js";
 
 const React = window.React;
@@ -21,6 +22,7 @@ export function App() {
   const [activeLesson, setActiveLesson] = useState(null);
   const [activeQuiz, setActiveQuiz] = useState(null);
   const [progress, setProgress] = useState(defaultProgress);
+  const [aiOpen, setAiOpen] = useState(false);
 
   useEffect(() => {
     if (!studentId) return;
@@ -114,6 +116,9 @@ export function App() {
                   🏠 Inicio
                 </button>
               )}
+              <button className="btn btn-ghost btn-ai" onClick={() => setAiOpen(true)}>
+                ✨ Asistente AI
+              </button>
               <button className="btn btn-primary">⬇ Exportar SCORM</button>
             </div>
           </div>
@@ -123,6 +128,15 @@ export function App() {
           )}
           {view === "quiz-select" && <QuizSelect setView={setView} setActiveQuiz={setActiveQuiz} />}
           {view === "quiz" && activeQuiz && <QuizView quiz={activeQuiz} setView={setView} addScore={addScore} />}
+          <AIChatPanel 
+            open={aiOpen} 
+            onClose={() => setAiOpen(false)} 
+            currentView={view}
+            currentModule={currentMod}
+            currentLesson={activeLesson}
+            allModules={MODULES}
+            studentId={studentId}
+          />
         </div>
       </div>
     </>

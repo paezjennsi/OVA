@@ -2,3 +2,4 @@ node_modules/
 database/*.sqlite
 database/*.sqlite-journal
 debug-2993a7.log
+.env

@@ -9,20 +9,32 @@ if errorlevel 1 (
   exit /b 1
 )
 
-if not exist "dist\app.js" (
-  echo Compilando el OVA ^(primera vez^)...
-  call npm.cmd run build
-  if errorlevel 1 (
-    echo Fallo el build.
-    pause
-    exit /b 1
-  )
+echo.
+echo ============================================================
+echo            INICIANDO OVA CON IA GEMINI
+echo ============================================================
+echo.
+
+echo [1/3] Liberando puerto 3765...
+for /f "tokens=5" %%a in ('netstat -ano ^| findstr :3765') do (
+  taskkill /PID %%a /F >nul 2>&1
 )
 
-echo.
-echo Servidor OVA en http://localhost:3765
+echo [2/3] Compilando frontend...
+call npm.cmd run build
+if errorlevel 1 (
+  echo Fallo el build.
+  pause
+  exit /b 1
+)
+
+echo [3/3] Iniciando servidor en http://localhost:3765
+echo Abre: http://localhost:3765
 echo Prueba salud: http://localhost:3765/api/health
-echo Deja esta ventana abierta. Cierrala para detener el servidor.
 echo.
+
 node server\index.js
-if errorlevel 1 pause
+
+echo.
+echo Servidor detenido.
+pause

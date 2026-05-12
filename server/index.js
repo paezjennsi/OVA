@@ -1,12 +1,39 @@
 const path = require("path");
 const fs = require("fs");
 const crypto = require("crypto");
+const http = require("http");
 const express = require("express");
 
 const ROOT = path.join(__dirname, "..");
+
+function loadEnvFile(filePath) {
+  if (!fs.existsSync(filePath)) return;
+  const content = fs.readFileSync(filePath, "utf8");
+  for (const rawLine of content.split(/\r?\n/)) {
+    const line = rawLine.trim();
+    if (!line || line.startsWith("#")) continue;
+    const equalsIndex = line.indexOf("=");
+    if (equalsIndex === -1) continue;
+    const key = line.slice(0, equalsIndex).trim();
+    let value = line.slice(equalsIndex + 1).trim();
+    if (!key) continue;
+    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+      value = value.slice(1, -1);
+    }
+    if (process.env[key] === undefined) {
+      process.env[key] = value;
+    }
+  }
+}
+
+loadEnvFile(path.join(ROOT, ".env"));
+
 const PORT = Number(process.env.PORT) || 3765;
 const DB_PATH = process.env.OVA_DB_PATH || path.join(ROOT, "database", "ova.sqlite");
 const DEBUG_LOG = path.join(ROOT, "debug-2993a7.log");
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
+const GEMINI_API_URL = process.env.GEMINI_API_URL || "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent";
+const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-flash-latest";
 
 function agentLog(payload) {
   try {
@@ -90,7 +117,84 @@ function emptyToNull(v) {
 }
 
 app.get("/api/health", (_req, res) => {
-  res.json({ ok: true, db: path.basename(DB_PATH) });
+  res.json({ ok: true, db: path.basename(DB_PATH), ai: Boolean(GEMINI_API_KEY), model: GEMINI_MODEL });
+});
+
+app.post("/api/ai/chat", async (req, res) => {
+  const message = emptyToNull(req.body?.message ?? req.body?.prompt);
+  if (!message) {
+    return res.status(400).json({ error: "message es obligatorio" });
+  }
+
+  if (!GEMINI_API_KEY) {
+    agentLog({ hypothesisId: "H_ai_key", message: "missing Gemini API key" });
+    return res.status(500).json({ error: "Gemini no está configurado en el servidor" });
+  }
+
+  if (typeof fetch !== "function") {
+    return res.status(500).json({ error: "El entorno de Node no soporta fetch" });
+  }
+
+  const systemInstruction = emptyToNull(req.body?.systemInstruction);
+  const contents = Array.isArray(req.body?.contents) && req.body.contents.length > 0
+    ? req.body.contents
+    : [{ role: "user", parts: [{ text: message }] }];
+
+  // Contexto pedagógico para logging y análisis
+  const pedagogicalContext = {
+    view: req.body?.view,
+    module: req.body?.module,
+    lesson: req.body?.lesson,
+    studentId: req.body?.studentId,
+  };
+
+  const payload = { contents };
+  if (systemInstruction) {
+    payload.systemInstruction = { parts: [{ text: systemInstruction }] };
+  }
+
+  try {
+    // Log la consulta con contexto pedagógico
+    agentLog({
+      hypothesisId: "H_ai_chat",
+      action: "chat_query",
+      message: `AI chat initiated in ${pedagogicalContext.view || "unknown"} view`,
+      pedagogicalContext,
+      timestamp: new Date().toISOString(),
+    });
+
+    const response = await fetch(GEMINI_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-goog-api-key": GEMINI_API_KEY,
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await response.json().catch(() => null);
+    if (!response.ok) {
+      const apiMessage = data?.error?.message || "Error al consultar Gemini";
+      agentLog({ hypothesisId: "H_ai_api", message: apiMessage, status: response.status, pedagogicalContext });
+      return res.status(response.status).json({ error: apiMessage });
+    }
+
+    const replyText = data?.candidates?.[0]?.content?.parts?.map((part) => part?.text || "").join("").trim();
+    if (!replyText) {
+      agentLog({ hypothesisId: "H_ai_empty", message: "Gemini returned empty response", pedagogicalContext });
+      return res.status(502).json({ error: "Gemini respondió sin contenido" });
+    }
+
+    return res.json({
+      reply: replyText,
+      model: GEMINI_MODEL,
+      usageMetadata: data?.usageMetadata || null,
+    });
+  } catch (error) {
+    agentLog({ hypothesisId: "H_ai_fetch", message: String(error?.message || error), pedagogicalContext });
+    console.error(error);
+    return res.status(502).json({ error: "No se pudo conectar con Gemini" });
+  }
 });
 
 app.post("/api/students", (req, res) => {
@@ -226,11 +330,46 @@ app.use((req, res) => {
   });
 
   const HOST = process.env.OVA_HOST || "0.0.0.0";
-  app.listen(PORT, HOST, () => {
-    console.log(`OVA servidor escuchando en http://127.0.0.1:${PORT} y http://localhost:${PORT}`);
-    console.log(`SQLite: ${DB_PATH}`);
+  
+  // Log before starting server
+  console.log("\n" + "=".repeat(60));
+  console.log("🚀 INICIANDO SERVIDOR OVA CON IA GEMINI");
+  console.log("=".repeat(60));
+  
+  const server = app.listen(PORT, () => {
+    console.log(`\n✅ Servidor escuchando en:`);
+    console.log(`   📱 http://localhost:${PORT}`);
+    console.log(`   🌐 http://127.0.0.1:${PORT}`);
+    console.log(`\n📦 Base de datos: ${DB_PATH}`);
+    console.log(`🤖 Gemini API: ${GEMINI_API_KEY ? "✅ Configurado" : "❌ No configurado"}`);
+    console.log("=".repeat(60) + "\n");
+  });
+
+  const legacyPort = 8080;
+  if (legacyPort !== PORT) {
+    const redirectServer = http.createServer((req, res) => {
+      const target = `http://127.0.0.1:${PORT}${req.url || "/"}`;
+      res.statusCode = 302;
+      res.setHeader("Location", target);
+      res.setHeader("Content-Type", "text/plain; charset=utf-8");
+      res.end(`OVA ahora responde en ${target}\n`);
+    });
+
+    redirectServer.on("error", (err) => {
+      console.warn(`⚠️ No se pudo activar el redirect de ${legacyPort}: ${err.message}`);
+    });
+
+    redirectServer.listen(legacyPort, "127.0.0.1", () => {
+      console.log(`↪️  Puerto legado disponible en http://localhost:${legacyPort} -> http://localhost:${PORT}`);
+    });
+  }
+  
+  server.on("error", (err) => {
+    console.error(`❌ Error en servidor: ${err.message}`);
+    process.exit(1);
   });
 })().catch((err) => {
-  console.error(err);
+  console.error("❌ Error al inicializar:");
+  console.error(err.message || err);
   process.exit(1);
 });
